@@ -1,0 +1,139 @@
+\section{Linear Programming}
+
+Linear programming (LP) is one of the most basic optimisation frameworks. The idea is to simply optimise a linear function subject to some constraints. These constraints can be equalities or inequalities.
+
+A general LP can be written as
+\begin{align}
+    \text{maximise} \quad & f(x_1,\dots,x_k) \\
+    \text{subject to} \quad 
+    & g_i(x_1,\dots,x_k)=b_i, \\
+    & h_j(x_1,\dots,x_k)\le c_j,
+\end{align}
+where all functions involved are linear in the optimisation variables.
+
+We call the function $f(x_1, \dots, x_k)$ an \textbf{objective function} of the variables $x_1, \dots, x_k$.
+
+It is usually more convenient to express everything in vector form. Let
+\[
+\vec{x}\in\mathbb{R}^k
+\]
+denotes the optimisation variables. Then the LP becomes
+\begin{align}
+    \text{maximise} \quad & \vec{a}\cdot\vec{x} \\
+    \text{subject to} \quad 
+    \label{equality-condition}
+    & B\vec{x}=\vec{b}, \\
+    \label{inequality-condition}
+    & C\vec{x}\le \vec{c}.
+\end{align}
+where the order $\le$ is applied component-wise.
+Geometrically, the constraints define a feasible region, and the objective function selects the “best” point inside that region.
+
+An important theme in optimisation is that many problems which do not initially look linear can often be rewritten as LPs by introducing auxiliary variables. For example, the problem of finding the $\ell_0$ and $\ell_{\infty}$ norms can be converted to a linear programming problem. 
+
+The key idea is to rewrite the problem of finding the absolute value of the function as a linear programming problem by introducing auxiliary variables. 
+
+First, consider the simpler problem of evaluating the absolute value \(|z|\) of a number \(z\). This will be equal to \(z\) if \(z\ge 0\), and equal to \(-z\) if \(z<0\).
+
+One way to evaluate this is to introduce a variable \(x\), and solve the simple LP
+\begin{align}
+    |z|
+    =
+    \text{minimise} \quad & x \label{eq:absolute-lp-1} \\
+    \text{subject to} \quad &
+    -x \le z \le x. \label{eq:absolute-lp-2}
+\end{align}
+
+If \(z\ge 0\), then the constraint
+\[
+z\le x
+\]
+is the limiting one, and the minimum value we can take is \(x=z\).
+
+On the other hand, if \(z<0\), then the constraint
+\[
+-x\le z
+\]
+becomes the limiting one, in which case the minimum positive value is \(x=-z\).
+
+In both cases, $x=|z|$.
+
+\begin{prf}[\(\ell_1\) Norm as an LP]{prf:l1norm}
+Recall that
+\[
+\|\vec{y}\|_1=\sum_i |y_i|.
+\]
+
+Introduce auxiliary variables \(x_i\ge 0\) satisfying
+\[
+-x_i\le y_i\le x_i.
+\]
+
+Then
+\begin{align}
+    \|\vec{y}\|_1
+    =
+    \text{minimise} \quad & \sum_i x_i \\
+    \text{subject to} \quad &
+    -x_i\le y_i\le x_i.
+\end{align}
+
+The constraints force each \(x_i\) to upper bound \(|y_i|\), and minimising the sum gives exactly the \(\ell_1\) norm.
+\end{prf}
+
+\begin{prf}[\(\ell_\infty\) Norm as an LP]{prf:linfnorm}
+Recall that
+\[
+\|\vec{y}\|_\infty=\max_i |y_i|.
+\]
+
+Introduce a scalar variable \(x\) such that
+\[
+-x\le y_i\le x
+\qquad \forall i.
+\]
+
+Then
+\begin{align}
+    \|\vec{y}\|_\infty
+    =
+    \text{minimise} \quad & x \\
+    \text{subject to} \quad &
+    -x\le y_i\le x.
+\end{align}
+
+Minimising \(x\) forces it to become the largest absolute component of \(\vec{y}\).
+\end{prf}
+
+\subsection{Classification of constraints}
+The constraints imposed on an optimisation problem can broadly be divided into two categories. The first consists of constraints that define the problem itself, whereas the second corresponds to constraints that specify a particular instance of the problem.
+
+The former are independent of the specific instance being solved and remain fixed across all instances of the optimisation problem. The latter, however, depends on the input data and determines the particular configuration being studied.
+
+\begin{prf}[Problem and Instance Constraints]{prf:problem-instance}
+
+Consider the shortest path problem on a graph.
+
+Suppose we want to travel from a starting vertex \(s\) to a destination vertex \(t\) while minimising the total travel cost.
+
+Certain constraints remain unchanged regardless of the particular graph being studied
+\begin{itemize}
+    \item paths must follow existing edges of the graph,
+    \item movement is only allowed between connected vertices,
+    \item the path must begin at \(s\) and terminate at \(t\).
+\end{itemize}
+
+Now suppose each edge is assigned a cost $c_{ij}$
+
+The actual numerical values of these costs determine the particular instance of the optimisation problem. Changing the edge weights changes the instance, while the underlying shortest-path problem itself remains the same.
+\end{prf}
+
+The instance of a problem can be thought of as analogous to the input data of a programming problem. Although the program to solve a general problem remains unchanged, the input data define the instance of the problem being solved.\
+
+\subsection{Feasibility}
+Any vector $\vec{x}$ satisfying the constraints of an LP; i.e. \eqref{equality-condition} and \eqref{inequality-condition} is called a \textbf{feasible point}. The set of all feasible points, $\mathcal{F}$ is called a feasible set.
+\begin{theo}[$\mathcal{F}$ is a convex set]{feasible set is convex}
+If $\vec{x_1}$ and $\vec{x_2}$ are both feasible points, then any vector of the form $\vec{x'} = p\vec{x_1} + (1-p)\vec{x_2}$ is also a feasible point, where $p \in [0,1] \cap \mathbb{R}$.
+The proof is rather trivial, constraining $0\le p \le 1$ and then applying matrices $B$ and $C$ on $\vec{x'}$ yields the required vectors $\vec{b}$ and $\vec{c}$ respectively. Constraining $p$ ensures that the sign of the inequality does not change.
+    
+\end{theo}
