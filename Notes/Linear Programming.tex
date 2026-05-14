@@ -1,6 +1,6 @@
 \section{Linear Programming}
 
-Linear programming (LP) is one of the most basic optimisation frameworks. The idea is to simply optimise a linear function subject to some constraints. These constraints can be equalities or inequalities.
+Linear programming (LP) is one of the most basic optimisation frameworks. The idea is simply to optimise a linear function subject to some constraints. These constraints can be equalities or inequalities.
 
 A general LP can be written as
 \begin{align}
@@ -17,7 +17,7 @@ It is usually more convenient to express everything in vector form. Let
 \[
 \vec{x}\in\mathbb{R}^k
 \]
-denotes the optimisation variables. Then the LP becomes
+denote the optimisation variables. Then the LP becomes
 \begin{align}
     \text{maximise} \quad & \vec{a}\cdot\vec{x} \\
     \text{subject to} \quad 
@@ -27,11 +27,12 @@ denotes the optimisation variables. Then the LP becomes
     & C\vec{x}\le \vec{c}.
 \end{align}
 where the order $\le$ is applied component-wise.
+
 Geometrically, the constraints define a feasible region, and the objective function selects the “best” point inside that region.
 
-An important theme in optimisation is that many problems which do not initially look linear can often be rewritten as LPs by introducing auxiliary variables. For example, the problem of finding the $\ell_0$ and $\ell_{\infty}$ norms can be converted to a linear programming problem. 
+An important theme in optimisation is that many problems which do not initially look linear can often be rewritten as LPs by introducing auxiliary variables. For example, the problem of finding the $\ell_1$ and $\ell_{\infty}$ norms can be converted to a linear programming problem.
 
-The key idea is to rewrite the problem of finding the absolute value of the function as a linear programming problem by introducing auxiliary variables. 
+The key idea is to rewrite the problem of finding the absolute value of a function as a linear programming problem by introducing auxiliary variables.
 
 First, consider the simpler problem of evaluating the absolute value \(|z|\) of a number \(z\). This will be equal to \(z\) if \(z\ge 0\), and equal to \(-z\) if \(z<0\).
 
@@ -54,7 +55,7 @@ On the other hand, if \(z<0\), then the constraint
 \[
 -x\le z
 \]
-becomes the limiting one, in which case the minimum positive value is \(x=-z\).
+becomes the limiting one, in which case the minimum value is \(x=-z\).
 
 In both cases, $x=|z|$.
 
@@ -106,6 +107,7 @@ Minimising \(x\) forces it to become the largest absolute component of \(\vec{y}
 \end{prf}
 
 \subsection{Classification of constraints}
+
 The constraints imposed on an optimisation problem can broadly be divided into two categories. The first consists of constraints that define the problem itself, whereas the second corresponds to constraints that specify a particular instance of the problem.
 
 The former are independent of the specific instance being solved and remain fixed across all instances of the optimisation problem. The latter, however, depends on the input data and determines the particular configuration being studied.
@@ -116,33 +118,249 @@ Consider the shortest path problem on a graph.
 
 Suppose we want to travel from a starting vertex \(s\) to a destination vertex \(t\) while minimising the total travel cost.
 
-Certain constraints remain unchanged regardless of the particular graph being studied
+Certain constraints remain unchanged regardless of the particular graph being studied:
 \begin{itemize}
     \item paths must follow existing edges of the graph,
-    \item movement is only allowed between connected vertices,
+    \item movement is allowed only between connected vertices,
     \item the path must begin at \(s\) and terminate at \(t\).
 \end{itemize}
 
-Now suppose each edge is assigned a cost $c_{ij}$
+Now suppose each edge is assigned a cost $c_{ij}$.
 
 The actual numerical values of these costs determine the particular instance of the optimisation problem. Changing the edge weights changes the instance, while the underlying shortest-path problem itself remains the same.
 \end{prf}
 
-The instance of a problem can be thought of as analogous to the input data of a programming problem. Although the program to solve a general problem remains unchanged, the input data define the instance of the problem being solved.\
+The instance of a problem can be thought of as analogous to the input data of a programming problem. Although the program to solve a general problem remains unchanged, the input data define the instance of the problem being solved.
 
 \subsection{Feasibility}
-Any vector $\vec{x}$ satisfying the constraints of an LP; i.e. \eqref{equality-condition} and \eqref{inequality-condition} is called a \textbf{feasible point}. The set of all feasible points, $\mathcal{F}$ is called a feasible set.
+
+Any vector $\vec{x}$ satisfying the constraints of an LP, i.e. \eqref{equality-condition} and \eqref{inequality-condition}, is called a \textbf{feasible point}. The set of all feasible points, $\mathcal{F}$, is called the feasible set.
 \begin{theo}[$\mathcal{F}$ is a convex set]{feasible set is convex}
-If $\vec{x_1}$ and $\vec{x_2}$ are both feasible points, then any vector of the form $\vec{x'} = p\vec{x_1} + (1-p)\vec{x_2}$ is also a feasible point, where $p \in [0,1] \cap \mathbb{R}$.
-The proof is rather trivial, constraining $0\le p \le 1$ and then applying matrices $B$ and $C$ on $\vec{x'}$ yields the required vectors $\vec{b}$ and $\vec{c}$ respectively. Constraining $p$ ensures that the sign of the inequality does not change.
-    
+If $\vec{x}_1$ and $\vec{x}_2$ are both feasible points, then any vector of the form
+\[
+\vec{x}' = p\vec{x}_1 + (1-p)\vec{x}_2
+\]
+is also a feasible point, where
+\[
+p \in [0,1] \cap \mathbb{R}.
+\]
+
+The proof is straightforward. Applying the matrices $B$ and $C$ to $\vec{x}'$ gives
+\[
+B\vec{x}'
+=
+pB\vec{x}_1 + (1-p)B\vec{x}_2
+=
+p\vec{b} + (1-p)\vec{b}
+=
+\vec{b},
+\]
+and similarly,
+\[
+C\vec{x}'
+=
+pC\vec{x}_1 + (1-p)C\vec{x}_2
+\le
+p\vec{c} + (1-p)\vec{c}
+=
+\vec{c}.
+\]
+
+Restricting $p$ to the interval $[0,1]$ ensures that convex combinations preserve the inequalities.
 \end{theo}
 
 \begin{center}
     {\color{quantumdeep}
     \rule{\linewidth}{0.6pt}
-    
+
     \scshape\Large End of Day 1
-    
+
+    \rule{\linewidth}{0.6pt}}
+\end{center}
+
+We can nicely write an LP as the maximisation of the objective function over the feasible set:
+\begin{align}
+    & \alpha = \max_{\vec{x} \in \mathcal{F}} \vec{a} \cdot \vec{x}.
+\end{align}
+
+We call $\alpha$ the \textit{optimal value} of the problem, or equivalently, the value of the LP. The variable $\vec{x}^{*}$ denotes an optimal point, i.e. a vector that achieves the maximum:
+\begin{align}
+    & \vec{x}^{*} = \argmax_{\vec{x} \in \mathcal{F}} \vec{a} \cdot \vec{x}.
+\end{align}
+
+There can, of course, be infinitely many optimal points.
+
+\begin{theo}[Set of all optimal points is convex]{optimal convex}
+Let $\vec{x}_1$ and $\vec{x}_2$ be optimal points. Since both belong to $\mathcal{F}$, any convex combination
+\[
+p\vec{x}_1 + (1-p)\vec{x}_2
+\]
+also belongs to $\mathcal{F}$.
+
+Further, since both points achieve the optimal value $\alpha$,
+\[
+\vec{a}\cdot\vec{x}_1
+=
+\vec{a}\cdot\vec{x}_2
+=
+\alpha.
+\]
+
+Hence,
+\[
+\vec{a}\cdot\bigl(p\vec{x}_1 + (1-p)\vec{x}_2\bigr)
+=
+p\alpha + (1-p)\alpha
+=
+\alpha,
+\]
+which shows that every convex combination is also optimal.
+\end{theo}
+
+In the case where $\mathcal{F} = \emptyset$, i.e. there are no points satisfying the constraints, the LP is said to be \textit{infeasible}.
+There is a special class of problems concerned solely with checking the feasibility of an LP; these are called \textit{feasibility problems}. The goal of such problems is to determine whether $\mathcal{F}$ is empty or not.
+\begin{align}
+    \text{maximise} \quad & f(x_1,\dots,x_k) \\
+    \text{subject to} \quad 
+    & g_i(x_1,\dots,x_k)=b_i, \\
+    & h_j(x_1,\dots,x_k)\le c_j,
+    \label{feasibility LPs}
+\end{align}
+
+Hence, feasibility problems can themselves be viewed as linear programming problems.
+
+\begin{prf}[Feasible and Infeasible Problems]{feasible v/s infeasible}
+    Here are some examples related to feasible and infeasible LPs.
+    \begin{align}
+    \text{find} \quad & \vec{x} \\
+    \text{subject to} \quad 
+    & x_1 + x_2 + x_3 = 1,\\
+    & x_1 + x_2 \ge 1, \\
+    & x_1 + x_3 \ge 1.
+    \end{align}
+
+    \textbf{Claim:} The above problem is feasible. For instance, $(0,1,0)$ is a feasible point.
+
+    \begin{align}
+    \text{find} \quad & \vec{x} \\
+    \text{subject to} \quad 
+    & x_1 + x_2 = 1,\\
+    & x_1 \le \frac{1}{3}, \\
+    & x_2 \le \frac{1}{2}.
+    \end{align}
+
+    \textbf{Claim:} The above LP is infeasible. From constraints $2$ and $3$, we obtain
+    \[
+    x_1 + x_2 \le \frac{5}{6},
+    \]
+    whereas constraint $1$ requires
+    \[
+    x_1 + x_2 = 1.
+    \]
+
+    Therefore,
+    \[
+    \mathcal{F} = \emptyset.
+    \]
+\end{prf}
+
+It can be useful to write a feasibility problem as a standard LP problem. For example, if a problem is infeasible, then it might help to understand \textit{how close} it is to being feasible. It is also often numerically more stable to solve a standard LP than a pure feasibility LP.
+A common technique to convert a feasibility problem into a standard one is to introduce additional variables to \textit{relax} the constraints defining the feasible set, and then minimise or maximise these variables.
+
+\begin{prf}[Majorisation Problem]{Majorisation problem}
+
+Let \(x,y \in \mathbb{R}^n\). Arrange their coordinates in decreasing order:
+\[
+x_1^\downarrow \ge x_2^\downarrow \ge \cdots \ge x_n^\downarrow,
+\qquad
+y_1^\downarrow \ge y_2^\downarrow \ge \cdots \ge y_n^\downarrow.
+\]
+
+We say that \(x\) \textit{majorises} \(y\), written
+\[
+x \succ y,
+\]
+if the following conditions hold:
+\[
+\sum_{i=1}^k x_i^\downarrow
+\ge
+\sum_{i=1}^k y_i^\downarrow
+\qquad \text{for all } 1 \le k \le n-1,
+\]
+and
+\[
+\sum_{i=1}^n x_i
+=
+\sum_{i=1}^n y_i.
+\]
+
+Equivalently,
+\[
+x \succ y
+\iff
+\begin{cases}
+\displaystyle \sum_{i=1}^k x_i^\downarrow
+\ge
+\sum_{i=1}^k y_i^\downarrow,
+& 1 \le k < n,\\[1.2em]
+\displaystyle \sum_{i=1}^n x_i^\downarrow
+=
+\sum_{i=1}^n y_i^\downarrow.
+\end{cases}
+\]
+
+For probability vectors \(x,y \in \mathbb{R}^n\),
+\[
+x_i,y_i \ge 0,
+\qquad
+\sum_i x_i = \sum_i y_i = 1,
+\]
+the final equality condition is automatic.
+
+For two probability distributions, majorisation captures the notion of one distribution being more “disordered” or “spread out” than another.
+
+A vector $\vec{x}$ majorises $\vec{y}$ if and only if there exists a doubly stochastic matrix $D$ such that
+\[
+\vec{y} = D\vec{x}.
+\]
+
+%% I shall finish this example later, maybe after studying duality properly either from Boyd's lectures or from the book
+\end{prf}
+
+\section{Geometric Interpretation}
+
+Before trying to understand linear programs geometrically, it is customary to discuss affine subspaces. The main significance of such a subspace is that it need not pass through the origin.
+
+Mathematically, the geometry of an affine space is invariant under the group of bijective affine maps, whereas the geometry of a vector space is invariant under the group of bijective linear maps, and these groups are not isomorphic.
+
+For example, given an $m \times n$ matrix $A$ and a vector $b \in \mathbb{R}^m$, the set of solutions to the system
+\[
+Ax = b
+\]
+is an affine space, which is not, in general, a vector space.
+
+Affine spaces describe geometry where no point is intrinsically special. The requirement that a linear space contain the zero vector is forced by closure under scalar multiplication. Also, note that a single linear inequality of the form
+\[
+a^\top x \le b
+\]
+defines a half-space.
+
+\subsection{Equality constraints}
+
+The set of all equality constraints specifies an affine subspace
+\[
+\mathcal{H} \subseteq \mathbb{R}^k
+\]
+in which the feasible point must lie.
+
+The dimension of such a space is determined by the number of linearly independent equations in the LP. For $\ell$ linearly independent equations, the dimension of $\mathcal{H}$ is $k-\ell.$
+Each constraint specifies a hyperplane, and the coefficient vector appearing in the constraint is the normal vector to that hyperplane. Thus, the affine subspace $\mathcal{H}$ is the intersection of all such hyperplanes.
+
+\begin{center}
+    {\color{quantumdeep}
+    \rule{\linewidth}{0.6pt}
+
+    \scshape\Large End of Day 2
+
     \rule{\linewidth}{0.6pt}}
 \end{center}

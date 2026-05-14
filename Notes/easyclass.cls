@@ -103,7 +103,7 @@ frametitleaboveskip=\dimexpr-\ht\strutbox\relax
 \begin{mdframed}[]\relax%
 \label{#2}}{\end{mdframed}}
 %Example
-\newcounter{prf}[theo]\setcounter{prf}{0}
+\newcounter{prf}[chapter]\setcounter{prf}{0}
 \renewcommand{\theprf}{\arabic{chapter}.\arabic{prf}}
 \newenvironment{prf}[2][]{%
 \refstepcounter{prf}%
