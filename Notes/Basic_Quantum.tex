@@ -1,0 +1,146 @@
+\section{Overview of Quantum Mechanics}
+
+A pure state of a qubit can be represented by a 2-dimensional ket vector 
+$\ket{\psi} \in \mathbb{C}^{2}$:
+\[
+\ket{\psi} = \alpha \ket{0} + \beta \ket{1},
+\]
+where $\alpha, \beta \in \mathbb{C}$ satisfy
+\[
+|\alpha|^2 + |\beta|^2 = 1.
+\]
+
+Whenever this condition on $\alpha$ and $\beta$ is satisfied, we say that the state vector is \emph{normalized}. The complex numbers $\alpha$ and $\beta$ are called the \emph{probability amplitudes} of $\ket{\psi}$.
+
+\begin{theorem}[General Pure State]
+For every $\theta \in \mathbb{R}$, the state
+\[
+\ket{\psi} = \sin\theta \ket{0} + \cos\theta \ket{1}
+\]
+is a valid pure state.
+\end{theorem}
+
+\begin{theo}[Geneal Pure State]{General Pure state}
+We verify the normalization condition:
+\[
+|\sin\theta|^2 + |\cos\theta|^2
+= \sin^2\theta + \cos^2\theta
+= 1.
+\]
+Hence, the state is normalized and therefore represents a valid pure state.
+\end{theo}
+
+More generally, quantum information can be encoded in higher-dimensional systems. A $d$-dimensional quantum system is called a \emph{qudit}. Its pure state can be written as
+\[
+\ket{\psi} = \sum_{i=0}^{d-1} \alpha_i \ket{i},
+\]
+where $\alpha_i \in \mathbb{C}$ satisfy the normalization condition
+\[
+\sum_{i=0}^{d-1} |\alpha_i|^2 = 1.
+\]
+
+\begin{definition}[Standard Basis]
+The \emph{standard basis}, also known as the \emph{computational basis}, of 
+$\mathbb{C}^2$ is the orthonormal basis
+\[
+\mathcal{S} = \{\ket{0}, \ket{1}\},
+\]
+where
+\[
+\ket{0} =
+\begin{pmatrix}
+1\\
+0
+\end{pmatrix},
+\qquad
+\ket{1} =
+\begin{pmatrix}
+0\\
+1
+\end{pmatrix}.
+\]
+\end{definition}
+
+There are many other bases for $\mathbb{C}^2$. Another important basis is the Hadamard basis.
+
+\begin{definition}[Hadamard Basis]
+The \emph{Hadamard basis} of $\mathbb{C}^2$ is the orthonormal basis
+\[
+\mathcal{H} = \{\ket{+}, \ket{-}\},
+\]
+where
+\[
+\ket{+}
+=
+\frac{1}{\sqrt{2}}(\ket{0}+\ket{1})
+=
+\frac{1}{\sqrt{2}}
+\begin{pmatrix}
+1\\
+1
+\end{pmatrix},
+\]
+and
+\[
+\ket{-}
+=
+\frac{1}{\sqrt{2}}(\ket{0}-\ket{1})
+=
+\frac{1}{\sqrt{2}}
+\begin{pmatrix}
+1\\
+-1
+\end{pmatrix}.
+\]
+\end{definition}
+
+We now verify that this is indeed an orthonormal basis using bra-ket notation:
+\[
+\braket{+}
+=
+\frac{1}{2}
+\begin{pmatrix}
+1 & 1
+\end{pmatrix}
+\begin{pmatrix}
+1\\
+1
+\end{pmatrix}
+=
+\frac{1}{2}(2)
+=
+1.
+\]
+
+Similarly,
+\[
+\braket{-}
+=
+\frac{1}{2}
+\begin{pmatrix}
+1 & -1
+\end{pmatrix}
+\begin{pmatrix}
+1\\
+-1
+\end{pmatrix}
+=
+1,
+\]
+and
+\[
+\braket{+}{-}
+=
+\frac{1}{2}
+\begin{pmatrix}
+1 & 1
+\end{pmatrix}
+\begin{pmatrix}
+1\\
+-1
+\end{pmatrix}
+=
+0.
+\]
+
+Hence, $\mathcal{H}$ is an orthonormal basis of $\mathbb{C}^2$.

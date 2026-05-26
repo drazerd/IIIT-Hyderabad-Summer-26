@@ -1,0 +1,3 @@
+## Day - 16
+- Finished SDP(s) almost...
+- Hoping to start reading Mochon's paper.
