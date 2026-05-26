@@ -47,6 +47,7 @@
 % custom theorem boxes
 \RequirePackage[framemethod=TikZ]{mdframed}
 \RequirePackage{amsthm}
+\RequirePackage{physics}
 \newtheorem{theorem}{Theorem}[chapter]
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{proposition}{Proposition}

@@ -364,3 +364,108 @@ Each constraint specifies a hyperplane, and the coefficient vector appearing in 
 
     \rule{\linewidth}{0.6pt}}
 \end{center}
+
+\subsection{Inequality Constraints}
+
+Inequality constraints divide the space into two regions, i.e.\ they specify half-spaces such that $\vec{x}$ should lie in one of them. The coefficient vector appearing in the constraint is again a normal vector to the hyperplane that divides the space into two.
+This hyperplane is displaced from the origin by $c_j$ in the direction of $\vec{s_j}$.
+
+The set of all such constraints defines a collection of half-spaces. A feasible point must lie in the intersection of all such half-spaces.
+We call this intersection set a polyhedral set. Note that it is not necessary for the set to be bounded; in such a case, one calls the intersection a polyhedron rather than a polytope.
+Overall, we note that the feasible set $\mathcal{F}$ geometrically is the intersection of the affine subspace specified by the equality constraints and the polyhedron specified by the inequality constraints. This again is a polyhedral set which may or may not be a polytope.
+
+The probability simplex is the feasible region that arises when the variable being optimised (in the LP) is a probability distribution $p(x)$. Consider a random variable $X$ which takes on the values $x = 0,1,2$.
+
+In order for $p(x)$ to be a valid probability distribution, we require three inequality constraints, namely that the individual probabilities are non-negative:
+\[
+p(0) \ge 0,\quad p(1) \ge 0,\quad p(2) \ge 0.
+\]
+and the single normalisation constraint
+\[
+p(0)+p(1)+p(2)=1.
+\]
+
+Geometrically, we can represent the probability distribution as a point in $\mathbb{R}^3$. The inequality constraints restrict the components to the positive orthant. 
+The equality constraint specifies a plane passing through the points $(1,0,0), (0,1,0), (0,0,1)$. The intersection of the two creates a feasible set called the probability simplex.
+
+In this scenario, the probability simplex is bounded, so it is a polytope.
+
+\textbf{Do not forget the important property that a feasible set is always a convex set.}
+
+\section{Duality}
+\textit{Duality} is probably the most important property of a linear program. Every linear program has an alternative formulation called the \textit{dual problem.} 
+The importance of the dual is that any feasible point of the dual problem gives an upper bound on the original LP. To make a distinction, the original problem is referred to as the primal LP.
+We know that any point of the feasible set, gives a lower bound of the LP. However, without defining the dual of the problem, it is not trivial to find the upper bound of the LP.
+
+Under some mild assumptions, the optimal value of the dual LP is guaranteed to be the optimal value of the primal LP.
+We shall derive the general form of the dual LP in the vectorial notation. To do this, we shall associate \textit{lagrange multipliers} or dual variables to each constraint. Formally, 
+we define the lagrangian as
+\[
+\begin{aligned}
+\text{maximise} \quad & \vec{a}\cdot\vec{x} \\[1em]
+\text{subject to} \quad 
+& \vec{r}_i \cdot \vec{x} = b_i 
+\qquad i = 1,\ldots,m
+\qquad :\ y_i \\[0.8em]
+& \vec{s}_j \cdot \vec{x} \le c_j
+\qquad j = 1,\ldots,n
+\qquad :\ z_j
+\end{aligned}
+\]
+where $y_i$ are the dual variables associated with the equality constraints, and $z_j$ are the dual variables associated to thge inequality constraints.
+We shall define the lagrangian of the problem as the following function
+\begin{align}
+\mathcal{L}
+&=
+\vec{a}\cdot\vec{x}
++
+\sum_{i=1}^{m}
+y_i
+\left(
+b_i-\vec{r}_i\cdot\vec{x}
+\right)
++
+\sum_{j=1}^{n}
+z_j
+\left(
+c_j-\vec{s}_j\cdot\vec{x}
+\right)
+\tag{1.27a}
+\label{eq:lagrangian1}
+\\[1.5em]
+&=
+\left(
+\vec{a}
+-
+\sum_{i=1}^{m} y_i \vec{r}_i
+-
+\sum_{j=1}^{n} z_j \vec{s}_j
+\right)
+\cdot
+\vec{x}
++
+\sum_{i=1}^{m} y_i b_i
++
+\sum_{j=1}^{n} z_j c_j,
+\tag{1.27b}
+\label{eq:lagrangian2}
+\end{align}
+
+where $\mathcal{L}$ is a function of both $\vec{x}$, and all of the dual variables $y_i, z_j$.
+
+Apriori the dual variables are arbitrary, however we constrain the variable $z_j$ concerned with the ineqality constraints, to be non-negative.
+$$z_j \ge 0 \forall j.$$
+The above restriction implies 
+$$\mathcal{L} \ge \vec{a}\cdot\vec{x} \forall \vec{x} \in \mathcal{F} \text{whenever} z_i \ge 0 \forall i.$$
+
+This makes the lagrangian appear as an upper bound of the objective function. 
+Notice that it is possible to make the lagrangian independent of the primal variable $\vec{x}$.
+To do so, we concern ourselves with dual variables which satisfy
+$\vec{a}
+-
+\sum_{i=1}^{m} y_i \vec{r}_i
+-
+\sum_{j=1}^{n} z_j \vec{s}_j = 0.$
+
+Due to the above constraints, the lagrangian remains larger than the objective function when evaluated at any primal feasible point.
+The main observation now is that the tighest upper bound on the primal objective function is obtained by minimising the lagrangian over the dual variables subject to the constraints, that we imposed on $z_j$ and $y_i$.
