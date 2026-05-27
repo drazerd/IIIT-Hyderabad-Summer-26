@@ -4,10 +4,10 @@ Linear programming (LP) is one of the most basic optimisation frameworks. The id
 
 A general LP can be written as
 \begin{align}
-    \text{maximise} \quad & f(x_1,\dots,x_k) \\
-    \text{subject to} \quad 
-    & g_i(x_1,\dots,x_k)=b_i, \\
-    & h_j(x_1,\dots,x_k)\le c_j,
+    \text{maximise} \quad & f(x_1,\dots,x_k)           \\
+    \text{subject to} \quad
+                          & g_i(x_1,\dots,x_k)=b_i,    \\
+                          & h_j(x_1,\dots,x_k)\le c_j,
 \end{align}
 where all functions involved are linear in the optimisation variables.
 
@@ -15,16 +15,16 @@ We call the function $f(x_1, \dots, x_k)$ an \textbf{objective function} of the 
 
 It is usually more convenient to express everything in vector form. Let
 \[
-\vec{x}\in\mathbb{R}^k
+    \vec{x}\in\mathbb{R}^k
 \]
 denote the optimisation variables. Then the LP becomes
 \begin{align}
-    \text{maximise} \quad & \vec{a}\cdot\vec{x} \\
-    \text{subject to} \quad 
+    \text{maximise} \quad & \vec{a}\cdot\vec{x}  \\
+    \text{subject to} \quad
     \label{equality-condition}
-    & B\vec{x}=\vec{b}, \\
+                          & B\vec{x}=\vec{b},    \\
     \label{inequality-condition}
-    & C\vec{x}\le \vec{c}.
+                          & C\vec{x}\le \vec{c}.
 \end{align}
 where the order $\le$ is applied component-wise.
 
@@ -40,70 +40,70 @@ One way to evaluate this is to introduce a variable \(x\), and solve the simple 
 \begin{align}
     |z|
     =
-    \text{minimise} \quad & x \label{eq:absolute-lp-1} \\
+    \text{minimise} \quad   & x \label{eq:absolute-lp-1} \\
     \text{subject to} \quad &
     -x \le z \le x. \label{eq:absolute-lp-2}
 \end{align}
 
 If \(z\ge 0\), then the constraint
 \[
-z\le x
+    z\le x
 \]
 is the limiting one, and the minimum value we can take is \(x=z\).
 
 On the other hand, if \(z<0\), then the constraint
 \[
--x\le z
+    -x\le z
 \]
 becomes the limiting one, in which case the minimum value is \(x=-z\).
 
 In both cases, $x=|z|$.
 
 \begin{prf}[\(\ell_1\) Norm as an LP]{prf:l1norm}
-Recall that
-\[
-\|\vec{y}\|_1=\sum_i |y_i|.
-\]
+    Recall that
+    \[
+        \|\vec{y}\|_1=\sum_i |y_i|.
+    \]
 
-Introduce auxiliary variables \(x_i\ge 0\) satisfying
-\[
--x_i\le y_i\le x_i.
-\]
+    Introduce auxiliary variables \(x_i\ge 0\) satisfying
+    \[
+        -x_i\le y_i\le x_i.
+    \]
 
-Then
-\begin{align}
-    \|\vec{y}\|_1
-    =
-    \text{minimise} \quad & \sum_i x_i \\
-    \text{subject to} \quad &
-    -x_i\le y_i\le x_i.
-\end{align}
+    Then
+    \begin{align}
+        \|\vec{y}\|_1
+        =
+        \text{minimise} \quad   & \sum_i x_i \\
+        \text{subject to} \quad &
+        -x_i\le y_i\le x_i.
+    \end{align}
 
-The constraints force each \(x_i\) to upper bound \(|y_i|\), and minimising the sum gives exactly the \(\ell_1\) norm.
+    The constraints force each \(x_i\) to upper bound \(|y_i|\), and minimising the sum gives exactly the \(\ell_1\) norm.
 \end{prf}
 
 \begin{prf}[\(\ell_\infty\) Norm as an LP]{prf:linfnorm}
-Recall that
-\[
-\|\vec{y}\|_\infty=\max_i |y_i|.
-\]
+    Recall that
+    \[
+        \|\vec{y}\|_\infty=\max_i |y_i|.
+    \]
 
-Introduce a scalar variable \(x\) such that
-\[
--x\le y_i\le x
-\qquad \forall i.
-\]
+    Introduce a scalar variable \(x\) such that
+    \[
+        -x\le y_i\le x
+        \qquad \forall i.
+    \]
 
-Then
-\begin{align}
-    \|\vec{y}\|_\infty
-    =
-    \text{minimise} \quad & x \\
-    \text{subject to} \quad &
-    -x\le y_i\le x.
-\end{align}
+    Then
+    \begin{align}
+        \|\vec{y}\|_\infty
+        =
+        \text{minimise} \quad   & x \\
+        \text{subject to} \quad &
+        -x\le y_i\le x.
+    \end{align}
 
-Minimising \(x\) forces it to become the largest absolute component of \(\vec{y}\).
+    Minimising \(x\) forces it to become the largest absolute component of \(\vec{y}\).
 \end{prf}
 
 \subsection{Classification of constraints}
@@ -114,20 +114,20 @@ The former are independent of the specific instance being solved and remain fixe
 
 \begin{prf}[Problem and Instance Constraints]{prf:problem-instance}
 
-Consider the shortest path problem on a graph.
+    Consider the shortest path problem on a graph.
 
-Suppose we want to travel from a starting vertex \(s\) to a destination vertex \(t\) while minimising the total travel cost.
+    Suppose we want to travel from a starting vertex \(s\) to a destination vertex \(t\) while minimising the total travel cost.
 
-Certain constraints remain unchanged regardless of the particular graph being studied:
-\begin{itemize}
-    \item paths must follow existing edges of the graph,
-    \item movement is allowed only between connected vertices,
-    \item the path must begin at \(s\) and terminate at \(t\).
-\end{itemize}
+    Certain constraints remain unchanged regardless of the particular graph being studied:
+    \begin{itemize}
+        \item paths must follow existing edges of the graph,
+        \item movement is allowed only between connected vertices,
+        \item the path must begin at \(s\) and terminate at \(t\).
+    \end{itemize}
 
-Now suppose each edge is assigned a cost $c_{ij}$.
+    Now suppose each edge is assigned a cost $c_{ij}$.
 
-The actual numerical values of these costs determine the particular instance of the optimisation problem. Changing the edge weights changes the instance, while the underlying shortest-path problem itself remains the same.
+    The actual numerical values of these costs determine the particular instance of the optimisation problem. Changing the edge weights changes the instance, while the underlying shortest-path problem itself remains the same.
 \end{prf}
 
 The instance of a problem can be thought of as analogous to the input data of a programming problem. Although the program to solve a general problem remains unchanged, the input data define the instance of the problem being solved.
@@ -136,94 +136,94 @@ The instance of a problem can be thought of as analogous to the input data of a 
 
 Any vector $\vec{x}$ satisfying the constraints of an LP, i.e. \eqref{equality-condition} and \eqref{inequality-condition}, is called a \textbf{feasible point}. The set of all feasible points, $\mathcal{F}$, is called the feasible set.
 \begin{theo}[$\mathcal{F}$ is a convex set]{feasible set is convex}
-If $\vec{x}_1$ and $\vec{x}_2$ are both feasible points, then any vector of the form
-\[
-\vec{x}' = p\vec{x}_1 + (1-p)\vec{x}_2
-\]
-is also a feasible point, where
-\[
-p \in [0,1] \cap \mathbb{R}.
-\]
+    If $\vec{x}_1$ and $\vec{x}_2$ are both feasible points, then any vector of the form
+    \[
+        \vec{x}' = p\vec{x}_1 + (1-p)\vec{x}_2
+    \]
+    is also a feasible point, where
+    \[
+        p \in [0,1] \cap \mathbb{R}.
+    \]
 
-The proof is straightforward. Applying the matrices $B$ and $C$ to $\vec{x}'$ gives
-\[
-B\vec{x}'
-=
-pB\vec{x}_1 + (1-p)B\vec{x}_2
-=
-p\vec{b} + (1-p)\vec{b}
-=
-\vec{b},
-\]
-and similarly,
-\[
-C\vec{x}'
-=
-pC\vec{x}_1 + (1-p)C\vec{x}_2
-\le
-p\vec{c} + (1-p)\vec{c}
-=
-\vec{c}.
-\]
+    The proof is straightforward. Applying the matrices $B$ and $C$ to $\vec{x}'$ gives
+    \[
+        B\vec{x}'
+        =
+        pB\vec{x}_1 + (1-p)B\vec{x}_2
+        =
+        p\vec{b} + (1-p)\vec{b}
+        =
+        \vec{b},
+    \]
+    and similarly,
+    \[
+        C\vec{x}'
+        =
+        pC\vec{x}_1 + (1-p)C\vec{x}_2
+        \le
+        p\vec{c} + (1-p)\vec{c}
+        =
+        \vec{c}.
+    \]
 
-Restricting $p$ to the interval $[0,1]$ ensures that convex combinations preserve the inequalities.
+    Restricting $p$ to the interval $[0,1]$ ensures that convex combinations preserve the inequalities.
 \end{theo}
 
 \begin{center}
     {\color{quantumdeep}
-    \rule{\linewidth}{0.6pt}
+        \rule{\linewidth}{0.6pt}
 
-    \scshape\Large End of Day 1
+        \scshape\Large End of Day 1
 
-    \rule{\linewidth}{0.6pt}}
+        \rule{\linewidth}{0.6pt}}
 \end{center}
 
 We can nicely write an LP as the maximisation of the objective function over the feasible set:
 \begin{align}
-    & \alpha = \max_{\vec{x} \in \mathcal{F}} \vec{a} \cdot \vec{x}.
+     & \alpha = \max_{\vec{x} \in \mathcal{F}} \vec{a} \cdot \vec{x}.
 \end{align}
 
 We call $\alpha$ the \textit{optimal value} of the problem, or equivalently, the value of the LP. The variable $\vec{x}^{*}$ denotes an optimal point, i.e. a vector that achieves the maximum:
 \begin{align}
-    & \vec{x}^{*} = \argmax_{\vec{x} \in \mathcal{F}} \vec{a} \cdot \vec{x}.
+     & \vec{x}^{*} = \argmax_{\vec{x} \in \mathcal{F}} \vec{a} \cdot \vec{x}.
 \end{align}
 
 There can, of course, be infinitely many optimal points.
 
 \begin{theo}[Set of all optimal points is convex]{optimal convex}
-Let $\vec{x}_1$ and $\vec{x}_2$ be optimal points. Since both belong to $\mathcal{F}$, any convex combination
-\[
-p\vec{x}_1 + (1-p)\vec{x}_2
-\]
-also belongs to $\mathcal{F}$.
+    Let $\vec{x}_1$ and $\vec{x}_2$ be optimal points. Since both belong to $\mathcal{F}$, any convex combination
+    \[
+        p\vec{x}_1 + (1-p)\vec{x}_2
+    \]
+    also belongs to $\mathcal{F}$.
 
-Further, since both points achieve the optimal value $\alpha$,
-\[
-\vec{a}\cdot\vec{x}_1
-=
-\vec{a}\cdot\vec{x}_2
-=
-\alpha.
-\]
+    Further, since both points achieve the optimal value $\alpha$,
+    \[
+        \vec{a}\cdot\vec{x}_1
+        =
+        \vec{a}\cdot\vec{x}_2
+        =
+        \alpha.
+    \]
 
-Hence,
-\[
-\vec{a}\cdot\bigl(p\vec{x}_1 + (1-p)\vec{x}_2\bigr)
-=
-p\alpha + (1-p)\alpha
-=
-\alpha,
-\]
-which shows that every convex combination is also optimal.
+    Hence,
+    \[
+        \vec{a}\cdot\bigl(p\vec{x}_1 + (1-p)\vec{x}_2\bigr)
+        =
+        p\alpha + (1-p)\alpha
+        =
+        \alpha,
+    \]
+    which shows that every convex combination is also optimal.
 \end{theo}
 
 In the case where $\mathcal{F} = \emptyset$, i.e. there are no points satisfying the constraints, the LP is said to be \textit{infeasible}.
 There is a special class of problems concerned solely with checking the feasibility of an LP; these are called \textit{feasibility problems}. The goal of such problems is to determine whether $\mathcal{F}$ is empty or not.
 \begin{align}
-    \text{find} \quad & f(x_1,\dots,x_k) \\
-    \text{subject to} \quad 
-    & g_i(x_1,\dots,x_k)=b_i, \\
-    & h_j(x_1,\dots,x_k)\le c_j,
+    \text{find} \quad & f(x_1,\dots,x_k)           \\
+    \text{subject to} \quad
+                      & g_i(x_1,\dots,x_k)=b_i,    \\
+                      & h_j(x_1,\dots,x_k)\le c_j,
     \label{feasibility LPs}
 \end{align}
 
@@ -232,35 +232,35 @@ Hence, feasibility problems can themselves be viewed as linear programming probl
 \begin{prf}[Feasible and Infeasible Problems]{feasible v/s infeasible}
     Here are some examples related to feasible and infeasible LPs.
     \begin{align}
-    \text{find} \quad & \vec{x} \\
-    \text{subject to} \quad 
-    & x_1 + x_2 + x_3 = 1,\\
-    & x_1 + x_2 \ge 1, \\
-    & x_1 + x_3 \ge 1.
+        \text{find} \quad & \vec{x}              \\
+        \text{subject to} \quad
+                          & x_1 + x_2 + x_3 = 1, \\
+                          & x_1 + x_2 \ge 1,     \\
+                          & x_1 + x_3 \ge 1.
     \end{align}
 
     \textbf{Claim:} The above problem is feasible. For instance, $(0,1,0)$ is a feasible point.
 
     \begin{align}
-    \text{find} \quad & \vec{x} \\
-    \text{subject to} \quad 
-    & x_1 + x_2 = 1,\\
-    & x_1 \le \frac{1}{3}, \\
-    & x_2 \le \frac{1}{2}.
+        \text{find} \quad & \vec{x}              \\
+        \text{subject to} \quad
+                          & x_1 + x_2 = 1,       \\
+                          & x_1 \le \frac{1}{3}, \\
+                          & x_2 \le \frac{1}{2}.
     \end{align}
 
     \textbf{Claim:} The above LP is infeasible. From constraints $2$ and $3$, we obtain
     \[
-    x_1 + x_2 \le \frac{5}{6},
+        x_1 + x_2 \le \frac{5}{6},
     \]
     whereas constraint $1$ requires
     \[
-    x_1 + x_2 = 1.
+        x_1 + x_2 = 1.
     \]
 
     Therefore,
     \[
-    \mathcal{F} = \emptyset.
+        \mathcal{F} = \emptyset.
     \]
 \end{prf}
 
@@ -269,62 +269,62 @@ A common technique to convert a feasibility problem into a standard one is to in
 
 \begin{prf}[Majorisation Problem]{Majorisation problem}
 
-Let \(x,y \in \mathbb{R}^n\). Arrange their coordinates in decreasing order:
-\[
-x_1^\downarrow \ge x_2^\downarrow \ge \cdots \ge x_n^\downarrow,
-\qquad
-y_1^\downarrow \ge y_2^\downarrow \ge \cdots \ge y_n^\downarrow.
-\]
+    Let \(x,y \in \mathbb{R}^n\). Arrange their coordinates in decreasing order:
+    \[
+        x_1^\downarrow \ge x_2^\downarrow \ge \cdots \ge x_n^\downarrow,
+        \qquad
+        y_1^\downarrow \ge y_2^\downarrow \ge \cdots \ge y_n^\downarrow.
+    \]
 
-We say that \(x\) \textit{majorises} \(y\), written
-\[
-x \succ y,
-\]
-if the following conditions hold:
-\[
-\sum_{i=1}^k x_i^\downarrow
-\ge
-\sum_{i=1}^k y_i^\downarrow
-\qquad \text{for all } 1 \le k \le n-1,
-\]
-and
-\[
-\sum_{i=1}^n x_i
-=
-\sum_{i=1}^n y_i.
-\]
+    We say that \(x\) \textit{majorises} \(y\), written
+    \[
+        x \succ y,
+    \]
+    if the following conditions hold:
+    \[
+        \sum_{i=1}^k x_i^\downarrow
+        \ge
+        \sum_{i=1}^k y_i^\downarrow
+        \qquad \text{for all } 1 \le k \le n-1,
+    \]
+    and
+    \[
+        \sum_{i=1}^n x_i
+        =
+        \sum_{i=1}^n y_i.
+    \]
 
-Equivalently,
-\[
-x \succ y
-\iff
-\begin{cases}
-\displaystyle \sum_{i=1}^k x_i^\downarrow
-\ge
-\sum_{i=1}^k y_i^\downarrow,
-& 1 \le k < n,\\[1.2em]
-\displaystyle \sum_{i=1}^n x_i^\downarrow
-=
-\sum_{i=1}^n y_i^\downarrow.
-\end{cases}
-\]
+    Equivalently,
+    \[
+        x \succ y
+        \iff
+        \begin{cases}
+            \displaystyle \sum_{i=1}^k x_i^\downarrow
+            \ge
+            \sum_{i=1}^k y_i^\downarrow,
+             & 1 \le k < n, \\[1.2em]
+            \displaystyle \sum_{i=1}^n x_i^\downarrow
+            =
+            \sum_{i=1}^n y_i^\downarrow.
+        \end{cases}
+    \]
 
-For probability vectors \(x,y \in \mathbb{R}^n\),
-\[
-x_i,y_i \ge 0,
-\qquad
-\sum_i x_i = \sum_i y_i = 1,
-\]
-the final equality condition is automatic.
+    For probability vectors \(x,y \in \mathbb{R}^n\),
+    \[
+        x_i,y_i \ge 0,
+        \qquad
+        \sum_i x_i = \sum_i y_i = 1,
+    \]
+    the final equality condition is automatic.
 
-For two probability distributions, majorisation captures the notion of one distribution being more “disordered” or “spread out” than another.
+    For two probability distributions, majorisation captures the notion of one distribution being more “disordered” or “spread out” than another.
 
-A vector $\vec{x}$ majorises $\vec{y}$ if and only if there exists a doubly stochastic matrix $D$ such that
-\[
-\vec{y} = D\vec{x}.
-\]
+    A vector $\vec{x}$ majorises $\vec{y}$ if and only if there exists a doubly stochastic matrix $D$ such that
+    \[
+        \vec{y} = D\vec{x}.
+    \]
 
-%% I shall finish this example later, maybe after studying duality properly either from Boyd's lectures or from the book
+    %% I shall finish this example later, maybe after studying duality properly either from Boyd's lectures or from the book
 \end{prf}
 
 \section{Geometric Interpretation}
@@ -335,13 +335,13 @@ Mathematically, the geometry of an affine space is invariant under the group of 
 
 For example, given an $m \times n$ matrix $A$ and a vector $b \in \mathbb{R}^m$, the set of solutions to the system
 \[
-Ax = b
+    Ax = b
 \]
 is an affine space, which is not, in general, a vector space.
 
 Affine spaces describe geometry where no point is intrinsically special. The requirement that a linear space contain the zero vector is forced by closure under scalar multiplication. Also, note that a single linear inequality of the form
 \[
-a^\top x \le b
+    a^\top x \le b
 \]
 defines a half-space.
 
@@ -349,7 +349,7 @@ defines a half-space.
 
 The set of all equality constraints specifies an affine subspace
 \[
-\mathcal{H} \subseteq \mathbb{R}^k
+    \mathcal{H} \subseteq \mathbb{R}^k
 \]
 in which the feasible point must lie.
 
@@ -358,11 +358,11 @@ Each constraint specifies a hyperplane, and the coefficient vector appearing in 
 
 \begin{center}
     {\color{quantumdeep}
-    \rule{\linewidth}{0.6pt}
+        \rule{\linewidth}{0.6pt}
 
-    \scshape\Large End of Day 2
+        \scshape\Large End of Day 2
 
-    \rule{\linewidth}{0.6pt}}
+        \rule{\linewidth}{0.6pt}}
 \end{center}
 
 \subsection{Inequality Constraints}
@@ -378,14 +378,14 @@ The probability simplex is the feasible region that arises when the variable bei
 
 In order for $p(x)$ to be a valid probability distribution, we require three inequality constraints, namely that the individual probabilities are non-negative:
 \[
-p(0) \ge 0,\quad p(1) \ge 0,\quad p(2) \ge 0.
+    p(0) \ge 0,\quad p(1) \ge 0,\quad p(2) \ge 0.
 \]
 and the single normalisation constraint
 \[
-p(0)+p(1)+p(2)=1.
+    p(0)+p(1)+p(2)=1.
 \]
 
-Geometrically, we can represent the probability distribution as a point in $\mathbb{R}^3$. The inequality constraints restrict the components to the positive orthant. 
+Geometrically, we can represent the probability distribution as a point in $\mathbb{R}^3$. The inequality constraints restrict the components to the positive orthant.
 The equality constraint specifies a plane passing through the points $(1,0,0), (0,1,0), (0,0,1)$. The intersection of the two creates a feasible set called the probability simplex.
 
 In this scenario, the probability simplex is bounded, so it is a polytope.
@@ -393,79 +393,93 @@ In this scenario, the probability simplex is bounded, so it is a polytope.
 \textbf{Do not forget the important property that a feasible set is always a convex set.}
 
 \section{Duality}
-\textit{Duality} is probably the most important property of a linear program. Every linear program has an alternative formulation called the \textit{dual problem.} 
+\textit{Duality} is probably the most important property of a linear program. Every linear program has an alternative formulation called the \textit{dual problem.}
 The importance of the dual is that any feasible point of the dual problem gives an upper bound on the original LP. To make a distinction, the original problem is referred to as the primal LP.
 We know that any point of the feasible set, gives a lower bound of the LP. However, without defining the dual of the problem, it is not trivial to find the upper bound of the LP.
 
 Under some mild assumptions, the optimal value of the dual LP is guaranteed to be the optimal value of the primal LP.
-We shall derive the general form of the dual LP in the vectorial notation. To do this, we shall associate \textit{lagrange multipliers} or dual variables to each constraint. Formally, 
+We shall derive the general form of the dual LP in the vectorial notation. To do this, we shall associate \textit{lagrange multipliers} or dual variables to each constraint. Formally,
 we define the lagrangian as
 \[
-\begin{aligned}
-\text{maximise} \quad & \vec{a}\cdot\vec{x} \\[1em]
-\text{subject to} \quad 
-& \vec{r}_i \cdot \vec{x} = b_i 
-\qquad i = 1,\ldots,m
-\qquad :\ y_i \\[0.8em]
-& \vec{s}_j \cdot \vec{x} \le c_j
-\qquad j = 1,\ldots,n
-\qquad :\ z_j
-\end{aligned}
+    \begin{aligned}
+        \text{maximise} \quad & \vec{a}\cdot\vec{x}             \\[1em]
+        \text{subject to} \quad
+                              & \vec{r}_i \cdot \vec{x} = b_i
+        \qquad i = 1,\ldots,m
+        \qquad :\ y_i                                           \\[0.8em]
+                              & \vec{s}_j \cdot \vec{x} \le c_j
+        \qquad j = 1,\ldots,n
+        \qquad :\ z_j
+    \end{aligned}
 \]
 where $y_i$ are the dual variables associated with the equality constraints, and $z_j$ are the dual variables associated to thge inequality constraints.
 We shall define the lagrangian of the problem as the following function
 \begin{align}
-\mathcal{L}
-&=
-\vec{a}\cdot\vec{x}
-+
-\sum_{i=1}^{m}
-y_i
-\left(
-b_i-\vec{r}_i\cdot\vec{x}
-\right)
-+
-\sum_{j=1}^{n}
-z_j
-\left(
-c_j-\vec{s}_j\cdot\vec{x}
-\right)
-\tag{1.27a}
-\label{eq:lagrangian1}
-\\[1.5em]
-&=
-\left(
-\vec{a}
--
-\sum_{i=1}^{m} y_i \vec{r}_i
--
-\sum_{j=1}^{n} z_j \vec{s}_j
-\right)
-\cdot
-\vec{x}
-+
-\sum_{i=1}^{m} y_i b_i
-+
-\sum_{j=1}^{n} z_j c_j,
-\tag{1.27b}
-\label{eq:lagrangian2}
+    \mathcal{L}
+     & =
+    \vec{a}\cdot\vec{x}
+    +
+    \sum_{i=1}^{m}
+    y_i
+    \left(
+    b_i-\vec{r}_i\cdot\vec{x}
+    \right)
+    +
+    \sum_{j=1}^{n}
+    z_j
+    \left(
+    c_j-\vec{s}_j\cdot\vec{x}
+    \right)
+    \tag{1.27a}
+    \label{eq:lagrangian1}
+    \\[1.5em]
+     & =
+    \left(
+    \vec{a}
+    -
+    \sum_{i=1}^{m} y_i \vec{r}_i
+    -
+    \sum_{j=1}^{n} z_j \vec{s}_j
+    \right)
+    \cdot
+    \vec{x}
+    +
+    \sum_{i=1}^{m} y_i b_i
+    +
+    \sum_{j=1}^{n} z_j c_j,
+    \tag{1.27b}
+    \label{eq:lagrangian2}
 \end{align}
 
 where $\mathcal{L}$ is a function of both $\vec{x}$, and all of the dual variables $y_i, z_j$.
 
-Apriori the dual variables are arbitrary, however we constrain the variable $z_j$ concerned with the ineqality constraints, to be non-negative.
+Apriori the dual variables are arbitrary, however we constrain the variable $z_j$ concerned with the ineqality constraints, to be non-negative
 $$z_j \ge 0 \forall j.$$
-The above restriction implies 
-$$\mathcal{L} \ge \vec{a}\cdot\vec{x} \forall \vec{x} \in \mathcal{F} \text{whenever} z_i \ge 0 \forall i.$$
+The above restriction implies
+\[
+    \mathcal{L} \ge \vec{a}\cdot\vec{x}
+    \qquad
+    \text{for all } \vec{x} \in \mathcal{F},
+    \text{ provided that } z_i \ge 0 \  \forall i.
+\]
 
-This makes the lagrangian appear as an upper bound of the objective function. 
+This makes the lagrangian appear as an upper bound of the objective function.
 Notice that it is possible to make the lagrangian independent of the primal variable $\vec{x}$.
 To do so, we concern ourselves with dual variables which satisfy
 $\vec{a}
--
-\sum_{i=1}^{m} y_i \vec{r}_i
--
-\sum_{j=1}^{n} z_j \vec{s}_j = 0.$
+    -
+    \sum_{i=1}^{m} y_i \vec{r}_i
+    -
+    \sum_{j=1}^{n} z_j \vec{s}_j = 0.$
 
 Due to the above constraints, the lagrangian remains larger than the objective function when evaluated at any primal feasible point.
 The main observation now is that the tighest upper bound on the primal objective function is obtained by minimising the lagrangian over the dual variables subject to the constraints, that we imposed on $z_j$ and $y_i$.
+
+\begin{center}
+    {\color{quantumdeep}
+        \rule{\linewidth}{0.6pt}
+
+        \scshape\Large End of Day 3
+
+        \rule{\linewidth}{0.6pt}}
+\end{center}
