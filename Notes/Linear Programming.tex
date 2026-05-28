@@ -516,3 +516,25 @@ Hence the dual LP may be written compactly in vector form as
                                  & \vec{z} \ge \vec{0}.
     \end{aligned}
 \]
+
+The dual form of the LP is a constrained optimisation problem like the primal LP, but a minimisation one instead of a maximisation one.
+The \textit{dual objective function}, is linear in the dual variables $\vec{y}$ and $\vec{z}$ with the inequality constraint, $\vec{z} \ge 0$. Notice that in the dual variable problem we have two variables instead of one andn this can be resolved by concatentating the vectors $\vec{y}$ and $\vec{x}$ in a single vector,
+$\vec{y'} = \vec{y} \otimes \vec{z} \in \mathbb{R}^{m+n}.$
+
+\subsection{Dimensions of the dual problem}
+There is a clear difference between the dimensions of the primal and the dual problem. The primal problem optimies over $k$ variables and involves $m$ equality and $n$ inequality constraints; the dual problem optimises over $n+m$ variables and involves $k$ equality and $n$ inequality constraints.\
+We will call any pair of dual variables $(\vec{y}, \vec{z})$ that satisfy the constraints of the dual LP to be \textit{dual feasible}. We shall denote the set of all dual feasible variables as $\tilde{\mathcal{F}}$.
+
+\begin{align}
+     & \beta = \max_{(\vec{y},  \vec{z}) \in \tilde{\mathcal{F}}} \vec{b} \cdot \vec{y} + \vec{c} \cdot \vec{z}.
+\end{align}
+
+Similar to the primal LP, any pair ofvariables $(\vec{y*}, \vec{z*})$ that achieve the minimum are called \textit{dual problem}.
+
+%maybe I will add the problems of marginal LP, with its dual form here
+
+\subsection{Slack Variables}
+\textit{Slack variables} are the variables that often arise when switching from a primal to a dual problem, which do not appear in the objective function.
+
+\subsection{Weak and Strong duality}
+Note that any feasible pair of dual variables $\vec{y}$ and $\vec{z}$, satisying the constraints of the dual LP, provide an upper bound on the dual optimal value $\beta$, similarly any feasible primal variable $\vec{x}$ satisfying the constraints og the pirmal LP, provides a lower bound on the optimal value $\alpha$.
