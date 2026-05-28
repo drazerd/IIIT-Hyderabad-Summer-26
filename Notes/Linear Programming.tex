@@ -529,7 +529,7 @@ We will call any pair of dual variables $(\vec{y}, \vec{z})$ that satisfy the co
      & \beta = \max_{(\vec{y},  \vec{z}) \in \tilde{\mathcal{F}}} \vec{b} \cdot \vec{y} + \vec{c} \cdot \vec{z}.
 \end{align}
 
-Similar to the primal LP, any pair ofvariables $(\vec{y*}, \vec{z*})$ that achieve the minimum are called \textit{dual problem}.
+Similar to the primal LP, any pair ofvariables $(\vec{y^{*}}, \vec{z^{*}})$ that achieve the minimum are called \textit{dual problem}.
 
 %maybe I will add the problems of marginal LP, with its dual form here
 
@@ -537,4 +537,28 @@ Similar to the primal LP, any pair ofvariables $(\vec{y*}, \vec{z*})$ that achie
 \textit{Slack variables} are the variables that often arise when switching from a primal to a dual problem, which do not appear in the objective function.
 
 \subsection{Weak and Strong duality}
-Note that any feasible pair of dual variables $\vec{y}$ and $\vec{z}$, satisying the constraints of the dual LP, provide an upper bound on the dual optimal value $\beta$, similarly any feasible primal variable $\vec{x}$ satisfying the constraints og the pirmal LP, provides a lower bound on the optimal value $\alpha$.
+Note that any feasible pair of dual variables $\vec{y}$ and $\vec{z}$, satisying the constraints of the dual LP, provide an upper bound on the dual optimal value $\beta$, similarly any feasible primal variable $\vec{x}$ satisfying the constraints og the primal LP, provides a lower bound on the optimal value $\alpha$.
+We introduced the dual LP in order to obtain the tighetest upper bound on the primal optimal value.
+\begin{align}
+    \alpha = \vec{a} \cdot \vec{x^{*}}                                 \\
+    = (B^{T}\vec{y^{*}} + C^{T}\vec{z^{*}})\cdot \vec{x^{*}}           \\
+    = {\vec{y^{*}}\cdot B\vec{x^{*}} + \vec{z^{*}}\cdot C \vec{x^{*}}} \\
+    \ge \vec{y^{*}}\cdot \vec{b} + \vec{z^{*}} \cdot \vec{c}           \\
+    = \beta
+\end{align}
+
+This relation is known as \textit{weak duality.} Combinng the above statements, we can see that
+$$\vec{a}\cdot {\vec{x}} \le \alpha \le \beta \le \vec{b}\cdot \vec{y} + \vec{c}\cdot \vec{z}$$
+for all primal feasible points $\vec{x}$ and dual feasible pairs $\vec{y}$ and $\vec{z}$. It is straightforward to realise that the, if one finds the set of primal and dual feasible variables such that
+$$ \vec{a}\cdot \vec{x} = \vec{b} \cdot \vec{y} + \vec{c}\cdot \vec{y}$$
+then those variables must be primal and dual optimal respectively. Furthermore, the values of primal and dual LPs coincide; if such a condition holds we say that the LP satisfies strong duality.
+Strong duality is the generic behaviour of the LPs; in practice it is essentially always the case than an LP will satisfy strong duality, in particular it can be shown that
+
+\begin{theo}[Strong Duality in LP]
+    Whenever the primal LP is feasible and bounded, i.e. $-\infty < \alpha < \infty$, then strong duality holds, and the value of the primal and dual LPs coincide, $\alpha = \beta$.
+\end{theo}
+
+There are two other possibilities, that the primal LP can either be \textit{infeasible} or \textit{unbounded}. In the former case, the primal feasible set $\mathcal{F}$ is empty. In the other case the feasible set must be a polyhedra set, rather than a polytope, and the direction of the objective function must align with the direction in which the feasible set is unbounded.
+In both cases, strong duality will not in general hold.
+
+\subsection{Complementary Slackness}
