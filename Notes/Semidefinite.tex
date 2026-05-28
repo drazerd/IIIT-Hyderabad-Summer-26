@@ -1,0 +1,16 @@
+The fundamental aspects of semidefinite programming, are closely related the ones of linear programming. Whereas in the context of linear programming the basic objects of interest were \textit{real vectors,} in the context of semidefinite programming in quantum information, the objects of interest are \textit{Hermitiam operators.}
+
+\section{Primal semidefinite programs}
+A semidefinite program(SDP) is a constraineed optimisation problem in an \textit{operator variable}. We shall denote this operator variable as $X$. This is a \textit{Hermitian Operator} such that $X\dagger  = X$, and acts as on a complex vector space.
+The objective function is a real linear function in $X$, which can always be written as $tr(AX)$ for some hermitian operator A.
+
+In the context of an SDP, the operator $X$ is required to satisfy some linear equality and inequality constraints, of the form $\Phi_{i}(X) = B_{i}$ for $i = 1, \ldots , m$ and $\Gamma_{j}(X) \le C_{j}$ for $j = 1, \ldots , n$ where all of the $B_{i}$ and $C_{j}$ are Hermitian operators of arbitrary finite dimension, and where $\Phi_{i}(\cdot)$ and $\Gamma_{j}(\cdot)$ are linear maps that are \textit{hermiticity-preserving.}
+
+We use the symbol $\se$ to denote an operator inequality, i.e. $A\se B$ means that the operator $B-A$ must be positive semidefinite, i.e. all of its eigenvalues are non-negative.
+Formally, an SDP can be written as
+\begin{align}
+    \text{maximise}
+\end{align}
+
+W.L.O.G we assume that the primal SDP is a \textit{maximisation} problem.
+

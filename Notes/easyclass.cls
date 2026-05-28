@@ -237,3 +237,11 @@
     Instructor: #1
   \end{flushright}
 }
+
+\newcommand{\se}{\succcurlyeq}
+\newcommand{\pe}{\preccurlyeq}
+
+\renewcommand{\le}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\geq}{\geqslant}
