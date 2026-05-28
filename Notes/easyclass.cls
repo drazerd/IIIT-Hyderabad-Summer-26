@@ -10,10 +10,10 @@
 \LoadClass[twoside=false]{scrbook}
 
 \RequirePackage[
-    left=1in,
-    right=1in,
-    top=1in,
-    bottom=1.5in
+  left=1in,
+  right=1in,
+  top=1in,
+  bottom=1.5in
 ]{geometry}
 \RequirePackage{mathtools,amssymb,bm,bbold,enumerate}
 \RequirePackage[dvipsnames]{xcolor}
@@ -59,74 +59,74 @@
 \newcounter{theo}[chapter] \setcounter{theo}{0}
 \renewcommand{\thetheo}{\arabic{chapter}.\arabic{theo}}
 \newenvironment{theo}[2][]{%
-\refstepcounter{theo}%
-\ifstrempty{#1}%
-{\mdfsetup{%
-frametitle={%
-\tikz[baseline=(current bounding box.east),outer sep=0pt]
-\node[anchor=east,rectangle,fill=quantumlavender]
-{\strut Theorem~\thetheo};}}
-}%
-{\mdfsetup{%
-frametitle={%
-\tikz[baseline=(current bounding box.east),outer sep=0pt]
-\node[anchor=east,rectangle,fill=quantumlavender]
-{\strut Theorem~\thetheo:~#1};}}%
-}%
-\mdfsetup{innertopmargin=10pt,linecolor=quantumpurple,%
-linewidth=2pt,topline=true,%
-frametitleaboveskip=\dimexpr-\ht\strutbox\relax
-}
-\begin{mdframed}[]\relax%
-\label{#2}}{\end{mdframed}}
+  \refstepcounter{theo}%
+  \ifstrempty{#1}%
+  {\mdfsetup{%
+      frametitle={%
+          \tikz[baseline=(current bounding box.east),outer sep=0pt]
+          \node[anchor=east,rectangle,fill=quantumlavender]
+          {\strut Theorem~\thetheo};}}
+  }%
+  {\mdfsetup{%
+      frametitle={%
+          \tikz[baseline=(current bounding box.east),outer sep=0pt]
+          \node[anchor=east,rectangle,fill=quantumlavender]
+          {\strut Theorem~\thetheo:~#1};}}%
+  }%
+  \mdfsetup{innertopmargin=10pt,linecolor=quantumpurple,%
+    linewidth=2pt,topline=true,%
+    frametitleaboveskip=\dimexpr-\ht\strutbox\relax
+  }
+  \begin{mdframed}[]\relax%
+    \label{#2}}{\end{mdframed}}
 %Lemma
 \newcounter{lem}[theo] \setcounter{lem}{0}
 \renewcommand{\thelem}{\arabic{chapter}.\arabic{lem}}
 \newenvironment{lem}[2][]{%
-\refstepcounter{theo}%
-\ifstrempty{#1}%
-{\mdfsetup{%
-frametitle={%
-\tikz[baseline=(current bounding box.east),outer sep=0pt]
-\node[anchor=east,rectangle,fill=quantumdeep!20]
-{\strut Lemma~\thelem};}}
-}%
-{\mdfsetup{%
-frametitle={%
-\tikz[baseline=(current bounding box.east),outer sep=0pt]
-\node[anchor=east,rectangle,fill=quantumdeep!20]
-{\strut Lemma~\thelem:~#1};}}%
-}%
-\mdfsetup{innertopmargin=10pt,linecolor=quantumdeep,%
-linewidth=2pt,topline=true,%
-frametitleaboveskip=\dimexpr-\ht\strutbox\relax
-}
-\begin{mdframed}[]\relax%
-\label{#2}}{\end{mdframed}}
+  \refstepcounter{theo}%
+  \ifstrempty{#1}%
+  {\mdfsetup{%
+      frametitle={%
+          \tikz[baseline=(current bounding box.east),outer sep=0pt]
+          \node[anchor=east,rectangle,fill=quantumdeep!20]
+          {\strut Lemma~\thelem};}}
+  }%
+  {\mdfsetup{%
+      frametitle={%
+          \tikz[baseline=(current bounding box.east),outer sep=0pt]
+          \node[anchor=east,rectangle,fill=quantumdeep!20]
+          {\strut Lemma~\thelem:~#1};}}%
+  }%
+  \mdfsetup{innertopmargin=10pt,linecolor=quantumdeep,%
+    linewidth=2pt,topline=true,%
+    frametitleaboveskip=\dimexpr-\ht\strutbox\relax
+  }
+  \begin{mdframed}[]\relax%
+    \label{#2}}{\end{mdframed}}
 %Example
 \newcounter{prf}[chapter]\setcounter{prf}{0}
 \renewcommand{\theprf}{\arabic{chapter}.\arabic{prf}}
 \newenvironment{prf}[2][]{%
-\refstepcounter{prf}%
-\ifstrempty{#1}%
-{\mdfsetup{%
-frametitle={%
-\tikz[baseline=(current bounding box.east),outer sep=0pt]
-\node[anchor=east,rectangle,fill=black!8]
-{\strut Example~\theprf};}}
-}%
-{\mdfsetup{%
-frametitle={%
-\tikz[baseline=(current bounding box.east),outer sep=0pt]
-\node[anchor=east,rectangle,fill=black!8]
-{\strut Example~\theprf:~#1};}}%
-}%
-\mdfsetup{innertopmargin=10pt,linecolor=black!35,%
-linewidth=2pt,topline=true,%
-frametitleaboveskip=\dimexpr-\ht\strutbox\relax
-}
-\begin{mdframed}[]\relax%
-\label{#2}}{\end{mdframed}}
+  \refstepcounter{prf}%
+  \ifstrempty{#1}%
+  {\mdfsetup{%
+      frametitle={%
+          \tikz[baseline=(current bounding box.east),outer sep=0pt]
+          \node[anchor=east,rectangle,fill=black!8]
+          {\strut Example~\theprf};}}
+  }%
+  {\mdfsetup{%
+      frametitle={%
+          \tikz[baseline=(current bounding box.east),outer sep=0pt]
+          \node[anchor=east,rectangle,fill=black!8]
+          {\strut Example~\theprf:~#1};}}%
+  }%
+  \mdfsetup{innertopmargin=10pt,linecolor=black!35,%
+    linewidth=2pt,topline=true,%
+    frametitleaboveskip=\dimexpr-\ht\strutbox\relax
+  }
+  \begin{mdframed}[]\relax%
+    \label{#2}}{\end{mdframed}}
 
 
 %=================================
@@ -172,12 +172,12 @@ frametitleaboveskip=\dimexpr-\ht\strutbox\relax
 \deftriplepagestyle{pagestyle}
 %   [0.5pt]
 %   [0.3pt]
-  {}
-  {}
-  {\headmark}
-  {}
-  {\pagemark}
-  {}
+{}
+{}
+{\headmark}
+{}
+{\pagemark}
+{}
 
 \pagestyle{pagestyle}
 \renewcommand{\chapterpagestyle}{pagestyle}
@@ -186,9 +186,9 @@ frametitleaboveskip=\dimexpr-\ht\strutbox\relax
 %=================================
 % draw pictures
 \RequirePackage{tikz}
-\usetikzlibrary{arrows,positioning,calc} 
+\usetikzlibrary{arrows,positioning,calc}
 \tikzstyle{labeled}=[execute at begin node=$\scriptstyle,
-   execute at end node=$]
+  execute at end node=$]
 \RequirePackage{graphicx}
 
 %=================================
@@ -215,25 +215,25 @@ frametitleaboveskip=\dimexpr-\ht\strutbox\relax
 % }
 % make title
 \renewcommand{\maketitle}{
-    \centering
-    {\scshape{\Large  \@university, \@courseid} \par}
-    \vspace{1cm}
-    {\huge\bfseries{\@title} \par}
-    \vspace{1cm}
-    \includegraphics[width=0.8\textwidth]{figures/funny.png}
-    \vfill
-    % Bottom of the page
-    {\Large\itshape \@author \par}
-    {\large \@version \par}
+  \centering
+  {\scshape{\Large  \@university, \@courseid} \par}
+  \vspace{1cm}
+  {\huge\bfseries{\@title} \par}
+  \vspace{1cm}
+  \includegraphics[width=0.8\textwidth]{figures/funny.png}
+  \vfill
+  % Bottom of the page
+  {\Large\itshape \@author \par}
+  {\large \@version \par}
 }
 
 %=================================
 % add current instructor info 
 % on the right
 \newcommand{\curinstructor}[1]{
-    % instructor info
-    \vfill
-    \begin{flushright}
+  % instructor info
+  \vfill
+  \begin{flushright}
     Instructor: #1
-    \end{flushright}
+  \end{flushright}
 }
