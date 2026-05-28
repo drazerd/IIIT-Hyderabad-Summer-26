@@ -491,4 +491,28 @@ The main observation now is that the tighest upper bound on the primal objective
         \rule{\linewidth}{0.6pt}}
 \end{center}
 
-We formulate the new linear programming problem called the dual LP
+We formulate the new linear programming problem called the dual LP.
+In summation form, the dual LP is given by
+\[
+    \begin{aligned}
+        \text{minimise} \qquad   & \sum_{i=1}^{m} b_i y_i + \sum_{j=1}^{n} c_j z_j                                     \\[0.5em]
+        \text{subject to} \qquad & \sum_{i=1}^{m} y_i r_{ik} + \sum_{j=1}^{n} z_j s_{jk} \geq a_k, \qquad \forall\, k, \\[0.5em]
+                                 & z_j \ge 0, \qquad \forall\, j.
+    \end{aligned}
+\]
+We can simplify the notation by grouping the dual variables into vectors
+\[
+    \vec{y} \in \mathbb{R}^m, \qquad \vec{z} \in \mathbb{R}^n.
+\]
+If $B$ and $C$ denote the matrices whose rows are the vectors $\vec{r}_i$ and $\vec{s}_j$ respectively, then
+\[
+    \sum_{i=1}^{m} y_i \vec{r}_i = B^T \vec{y}, \qquad \sum_{j=1}^{n} z_j \vec{s}_j = C^T \vec{z}.
+\]
+Hence the dual LP may be written compactly in vector form as
+\[
+    \begin{aligned}
+        \text{minimise} \qquad   & \vec{b} \cdot \vec{y} + \vec{c} \cdot \vec{z} \\[0.5em]
+        \text{subject to} \qquad & B^T \vec{y} + C^T \vec{z} = \vec{a},          \\[0.5em]
+                                 & \vec{z} \ge \vec{0}.
+    \end{aligned}
+\]
