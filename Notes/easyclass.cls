@@ -8,6 +8,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{easyclass}[2/6/2019 custom lecture note class]
 \LoadClass[twoside=false]{scrbook}
+\RequirePackage{fix-cm}
 
 \RequirePackage[
   left=1in,
