@@ -1,7 +1,7 @@
-The fundamental aspects of semidefinite programming, are closely related the ones of linear programming. Whereas in the context of linear programming the basic objects of interest were \textit{real vectors,} in the context of semidefinite programming in quantum information, the objects of interest are \textit{Hermitiam operators.}
+The fundamental aspects of semidefinite programming, are closely related the ones of linear programming. Whereas in the context of linear programming the basic objects of interest were \textit{real vectors,} in the context of semidefinite programming in quantum information, the objects of interest are \textit{Hermitian operators.}
 
 \section{Primal semidefinite programs}
-A semidefinite program(SDP) is a constraineed optimisation problem in an \textit{operator variable}. We shall denote this operator variable as $X$. This is a \textit{Hermitian Operator} such that $X\dagger  = X$, and acts as on a complex vector space.
+A semidefinite program(SDP) is a constrained optimisation problem in an \textit{operator variable}. We shall denote this operator variable as $X$. This is a \textit{Hermitian Operator} such that $X^\dagger = X$, and acts on a complex vector space.
 The objective function is a real linear function in $X$, which can always be written as $tr(AX)$ for some hermitian operator A.
 
 In the context of an SDP, the operator $X$ is required to satisfy some linear equality and inequality constraints, of the form $\Phi_{i}(X) = B_{i}$ for $i = 1, \ldots , m$ and $\Gamma_{j}(X) \le C_{j}$ for $j = 1, \ldots , n$ where all of the $B_{i}$ and $C_{j}$ are Hermitian operators of arbitrary finite dimension, and where $\Phi_{i}(\cdot)$ and $\Gamma_{j}(\cdot)$ are linear maps that are \textit{hermiticity-preserving.}
@@ -15,17 +15,47 @@ Formally, an SDP can be written as
 W.L.O.G we assume that the primal SDP is a \textit{maximisation} problem.
 
 \begin{prf}[Maximum Eigenvalue of a Hermitian operator.]{Max Value of Hermitian operator}
-    A canonical problem is to find te maximum eigenvalue of a Hermitian operator $H$, where $H$ is treated as the particular instance of the general maximum eignevalue proble.
+    A canonical problem is to find the maximum eigenvalue of a Hermitian operator $H$, where $H$ is treated as the particular instance of the general maximum eigenvalue problem.
     We can write it as the following SDP:
     \begin{align}
         \text{maximise} \quad   & tr(H\rho)     \\
         \text{subject to} \quad & tr(\rho) = 1, \\
                                 & \rho \se 0.
     \end{align}
-    The program maximises
-
-
-
+    The program maximises the expected value of $H$ with respect to the quantum state $\rho$. The optimal value will be achieved when $\rho$ lies in the subspace of $H$ with the maximum eigenvalue. If $H$ is non-degenerate then this corresponds to the projector onto the eigenvector with maximum eigenvalue.
 \end{prf}
+In general an operator $X$ that satisfies all of the constraints, is said to be \textit{primal} feasible. The set of all primal feasible LPs $\mathcal{F}$ is convex, implying that if $X_{1}$ and $X_{2}$ are two feasible operators then $X' = pX_{1} + (1-p)X_{2}$ will also be feasible, for all $0 \le p \le 1$.
+
+We can compactly write an SDP as
+$$ \alpha = \max_{ X \in \mathcal{F}} tr(AX),$$
+
+with the optimal primal value being $\alpha$, and the optimal primal variable being $X^{*}$. There can be infinitely many optimal variables, which collectively form a convex set.
+
+Similar to LPs, any feasible point $X \in \mathcal{F}$ provides a lower bound, $tr(AX) \le \alpha$. If the feasible set of an SDP happens to be the empty set, $\mathcal{F} = \emptyset$, then the SDP is said to be infeasible, and the optimal value is taken to be $\alpha = -\infty$ i.e. the smallest possible value.
+We can then write feasibility SDPs as a special class of SDPs.
+
+\begin{prf}[Hamiltonian feasibility problem.]{Hamiltonian feasibility problem}
+    The problem where we have an unknown Hamiltonian $H$, and are given the average (expected) energy of a set of quantum states, $tr(H\rho_{i}) = E_{i},$ for $i = 1, \ldots, n.$ We need to find whether such a Hamiltonian $H$ exists whose ground state energy is non-negative, consistent with this data.
+    This can be written as the following feasibility SDP:
+
+    \begin{align}
+        \text{find}  \quad      & H                                             \\
+        \text{subject to} \quad & tr(H\rho_{i}) = E_{i} \quad i = 1, \ldots, n, \\
+                                & H \se 0.
+    \end{align}
+
+    A simple way to convert this into a standard optimisation SDP is to allow the hamiltonian $H$ to have negative energy eigenvalues, but to maximise the smallest eigenvalue.
+    We can replace the constraint $H \se 0$  with the constraint $H \se \lambda \mathbf{I}$ where $\lambda$ is a new variable. The SDP then becomes:
+    \begin{align}
+        \text{maximise}   & \quad \lambda               \\
+        \text{subject to} & \quad tr(H\rho_{i}) = E_{i} \\
+                          & H \se \lambda \mathbf{I}
+    \end{align}
+    if $\lambda^{*} < 0,$ then the problem is infeasible, i.e. there is no Hamiltonian with positive ground-state energy consistent with the data.
+    if $\lambda^{*} \ge 0,$ then the problem is feasible ($H^{*}$ being a solution).
+\end{prf}
+
+
+
 
 
